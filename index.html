@@ -70,6 +70,18 @@
       font-weight: 500;
     }
 
+    .header-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between; /* Pushes content to opposite sides */
+      align-items: baseline;          /* Aligns text along the same bottom line */
+    }
+
     main {
       max-width: 900px;
       margin: 3rem auto;
@@ -126,7 +138,7 @@
     }
 
     .experience-item {
-      margin-bottom: 1rem;
+      margin-bottom: 3rem;
     }
 
     .experience-title {
@@ -158,15 +170,15 @@
     }
 
 
-.portfolio-carousel {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 1rem 0;
-}
+    .portfolio-carousel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 1rem 0;
+    }
 
     .portfolio-grid {
       flex-wrap: wrap;
@@ -184,112 +196,113 @@
       transition: transform 0.3s ease;
     }
 
- .portfolio-carousel::-webkit-scrollbar {
-  display: none;
-}
+    .portfolio-carousel::-webkit-scrollbar {
+      display: none;
+    }
 
-.portfolio-carousel img {
-  height: 200px;
-  border-radius: 12px;
-  scroll-snap-align: center;
-  object-fit: cover;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
+    .portfolio-carousel img {
+      height: 200px;
+      border-radius: 12px;
+      scroll-snap-align: center;
+      object-fit: cover;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
 
-.portfolio-carousel img:hover {
-  transform: scale(1.05);
-}
+    .portfolio-carousel img:hover {
+      transform: scale(1.05);
+    }
 
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.3s ease;
-}
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
 
-.modal:target {
-  display: flex;
-}
+    .modal:target {
+      display: flex;
+    }
 
-footer {
-  background-color: var(--yellow);
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
-  margin-top: 2rem;
-}
+    footer {
+      background-color: var(--yellow);
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
 
-.social-links {
-  margin-top: 1rem;
-  display: flex;
-  gap: 1.2rem;
-}
+    .social-links {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1.2rem;
+    }
 
-.social-links a {
-  font-size: 1.5rem;
-  color: var(--deep-velvet); /* Professional dark anchor color */
-  transition: transform 0.3s ease, color 0.3s ease;
-  text-decoration: none;
-}
+    .social-links a {
+      font-size: 1.5rem;
+      color: var(--deep-velvet); /* Professional dark anchor color */
+      transition: transform 0.3s ease, color 0.3s ease;
+      text-decoration: none;
+    }
 
-.social-links a:hover {
-  color: var(--sunfire-glow); /* Pops to orange when you hover */
-  transform: translateY(-3px); /* Subtle bounce effect */
-}
+    .social-links a:hover {
+      color: var(--sunfire-glow); /* Pops to orange when you hover */
+      transform: translateY(-3px); /* Subtle bounce effect */
+    }
 
-/* Ensures the header text stays aligned with the photo */
-.header-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+    .modal-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 90%;
+    }
 
+    .modal-content {
+      max-height: 70vh; /* Keeps the photo from taking over the whole screen */
+      border: 2px solid var(--linen-whisper);
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
 
-.modal-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 90%;
-}
+    .modal-caption {
+      color: var(--deep-velvet); /* Soft cream text */
+      background-color: var(--linen-whisper); /* Dark anchor background */
+      padding: 1rem 2rem;
+      margin-top: 15px;
+      border-radius: 4px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      text-align: center;
+      max-width: 80%;
+      line-height: 1.4;
+      /* Optional: adds a slight "aesthetic" touch */
+      border-left: 3px solid var(--vibrant-pink); 
+    }
 
-.modal-content {
-  max-height: 70vh; /* Keeps the photo from taking over the whole screen */
-  border: 2px solid var(--linen-whisper);
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
+    .close-btn {
+      /* Make sure the close button stays visible on top of the dark modal */
+      z-index: 1001; 
+      font-size: 2rem;
+      transition: color 0.3s ease;
+    }
 
-.modal-caption {
-  color: var(--deep-velvet); /* Soft cream text */
-  background-color: var(--linen-whisper); /* Dark anchor background */
-  padding: 1rem 2rem;
-  margin-top: 15px;
-  border-radius: 4px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
-  text-align: center;
-  max-width: 80%;
-  line-height: 1.4;
-  /* Optional: adds a slight "aesthetic" touch */
-  border-left: 3px solid var(--vibrant-pink); 
-}
+    .close-btn:hover {
+      color: var(--bg-cream);
+    }
 
-.close-btn {
-  /* Make sure the close button stays visible on top of the dark modal */
-  z-index: 1001; 
-  font-size: 2rem;
-  transition: color 0.3s ease;
-}
-
-.close-btn:hover {
-  color: var(--bg-cream);
-}
-
+    .role {
+      margin: 0;
+      font-size: 1.2rem; /* Adjust as needed */
+    }
+    
+    .company {
+      font-style: italic;
+      font-weight: normal; /* Ensures it is not bold */
+    }
   </style>
 </head>
 <body>
@@ -297,7 +310,7 @@ footer {
   <header>
     <img src="100_1247 (1).jpg" alt="Anzhelika Kipenskaia" class="profile-pic" />
     <div class="header-text">
-      <h1>Angelika Kip</h1>
+      <h1>Angelika Kipenskaia</h1>
       <p>Marketing | Information Systems | Psychology</p>
       
       <div class="social-links">
@@ -348,137 +361,161 @@ footer {
     </section>
 
     <section class="scroll">
-      <h2>Honors</h2>
-      <ul>
-        <li>Dean’s List (Multiple Semesters)</li>
-        <li>Promoted from Orientation Leader to Intern</li>
-      </ul>
-    </section>
-
-    <section class="scroll">
       <h2>Professional Experience</h2>
-    
       <div class="experience-item">
-        <h3 class="role">Content Marketing Consultant <span class="company">— Nissan Communications Network</span></h3>
+        <div class="header-container">
+          <h3 class="role">Content Marketing Consultant</h3>
+          <span class="company">Nissan Communications Network</span>
+        </div>
         <ul>
           <li>Supported rebranding efforts by developing digital content strategies</li>
           <li>Designed brand elements and social media content to strengthen brand identity across platforms</li>
           <li>Drove a nearly 200% increase in audience engagement through consistent, strategically aligned content</li>
         </ul>
-        <li></li>
       </div>
-    
+
       <div class="experience-item">
-        <h3 class="role">Marketing Student Director <span class="company">— Towson University</span></h3>
+        <div class="header-container">
+          <h3 class="role">Marketing Student Director</h3>
+          <span class="company">Towson University</span>
+        </div>
         <ul>
           <li>Developed and executed digital marketing campaigns targeting prospective students and families</li>
           <li>Created social media content and promotional materials to increase awareness and engagement</li>
           <li>Collaborated on outreach initiatives that improved audience interaction and program visibility</li>
         </ul>
-        <li></li>
       </div>
-    
+
       <div class="experience-item">
-        <h3 class="role">Community Center Manager <span class="company">— Towson University</span></h3>
+        <div class="header-container">
+          <h3 class="role">Community Center Manager</h3>
+          <span class="company">Towson University</span>
+        </div>
         <ul>
           <li>Oversaw daily operations of a residential community center and supervised student employees</li>
           <li>Coordinated community programs and events to enhance resident engagement</li>
           <li>Managed scheduling, training, and compliance while fostering a welcoming environment</li>
         </ul>
-        <li></li>
       </div>
-    
+
       <div class="experience-item">
-        <h3 class="role">Research Assistant <span class="company">— Towson University</span></h3>
+        <div class="header-container">
+          <h3 class="role">Research Assistant</h3>
+          <span class="company">Towson University</span>
+        </div>
         <ul>
           <li>Managed scheduling, training, and compliance while fostering a welcoming environment</li>
           <li>Conducted data collection, cleaning, and analysis, and managed VR experimental simulations</li>
           <li>Co-presented research at psychological conferences</li>
         </ul>
-        <li></li>
       </div>
     </section>
 
     <section class="scroll">
       <h2>Selected Projects</h2>
-    
       <div class="experience-item">
-        <h3 class="role">ROI of AI: Quantifying the Short- and Long-term Revenue Impacts of AI-Generated Advertising Across Common and Luxury Goods<span class="company">— Ongoing</span></h3>
+        <div class="header-container">
+          <h3 class="role">ROI of AI: Quantifying the Short- and Long-term Revenue Impacts of AI-Generated Advertising Across Common and Luxury Goods</h3>
+          <span class="company">Ongoing</span>
+        </div>
         <ul>
           <li>Independent Study: Investigating the net financial impact of AI implementation, focusing on the balance between cost reduction and long-term ROI adjusted for customer loss risk</li>
         </ul>
-        <li></li>
       </div>
 
       <div class="experience-item">
-        <h3 class="role">Rage Bait: Evaluating the Effectiveness of Emotional Appeals on Consumer Engagement in Social Media Marketing<span class="company">— Ongoing</span></h3>
+        <div class="header-container">
+          <h3 class="role">Rage Bait: Evaluating the Effectiveness of Emotional Appeals on Consumer Engagement in Social Media Marketing</h3>
+          <span class="company">Ongoing</span>
+        </div>
         <ul>
           <li>Independent Study: Determining the most significant emotional drivers of consumer engagement for different content types via personal social media</li>
         </ul>
-        <li></li>
       </div>
 
       <div class="experience-item">
-        <h3 class="role">AI for Data Analysis Optimization in Behavioral Research<span class="company">— 2025</span></h3>
+        <div class="header-container">
+          <h3 class="role">AI for Data Analysis Optimization in Behavioral Research</h3>
+          <span class="company">2025</span>
+        </div>
         <ul>
           <li>Developed Python programs to optimize data cleaning and physiological data extraction</li>
         </ul>
-        <li></li>
       </div>
 
       <div class="experience-item">
-        <h3 class="role">Brand Extension Strategy: e.l.f. Cosmetics<span class="company">— 2025</span></h3>
+        <div class="header-container">
+          <h3 class="role">Brand Extension Strategy: e.l.f. Cosmetics</h3>
+          <span class="company">2025</span>
+        </div>
         <ul>
           <li>Created a brand extension concept aligned with e.l.f.’s brand equity and Gen Z consumer preferences</li>
           <li>Conducted market analysis to evaluate brand fit, positioning, and growth potential</li>
         </ul>
-        <li></li>
       </div>
 
+
       <div class="experience-item">
-        <h3 class="role">Marketing Campaign Analysis: American Eagle<span class="company">— 2025</span></h3>
+        <div class="header-container">
+          <h3 class="role">Marketing Campaign Analysis: American Eagle</h3>
+          <span class="company">2025</span>
+        </div>
         <ul>
           <li>Conducted a critical analysis of American Eagle’s viral ad campaign featuring Sydney Sweeney</li>
           <li>Evaluated brand alignment, audience reception, and cultural impact through a consumer behavior lens</li>
         </ul>
-        <li></li>
       </div>
 
       <div class="experience-item">
-        <h3 class="role">Integrated Marketing Campaign Development: Coca-Cola<span class="company">— 2025</span></h3>
+        <div class="header-container">
+          <h3 class="role">Integrated Marketing Campaign Development: Coca-Cola</h3>
+          <span class="company">2025</span>
+        </div>
         <ul>
           <li>Developed a data-informed marketing campaign to increase social media engagement among Gen Z consumers</li>
-          <li>Developed a data-informed marketing campaign to increase social media engagement among Gen Z consumers</li>
         </ul>
-        <li></li>
       </div>
 
       <div class="experience-item">
-        <h3 class="role">Product Prototype & Marketing Strategy: Hair Analyzer Pro<span class="company">— 2024</span></h3>
+        <div class="header-container">
+          <h3 class="role">Product Prototype & Marketing Strategy: Hair Analyzer Pro</h3>
+          <span class="company">2024</span>
+        </div>
         <ul>
           <li>Designed a consumer product prototype that analyzes hair type and health to deliver personalized recommendations</li>
           <li>Developed a corresponding marketing strategy targeting differentiated consumer segments</li>
         </ul>
-        <li></li>
       </div>
+    </section>
 
+    <section class="scroll">
+      <h2>Marketing Campaigns</h2>
+      <div class="portfolio-carousel">
+        <a href="path/to/your-campaign1.pdf" target="_blank" rel="noopener noreferrer">
+          <img src="campaign1-thumbnail.jpg" alt="Campaign 1 Preview" loading="lazy" />
+        </a>
+        
+        <a href="path/to/your-campaign2.pdf" target="_blank" rel="noopener noreferrer">
+          <img src="campaign2-thumbnail.jpg" alt="Campaign 2 Preview" loading="lazy" />
+        </a>
+        
+        </div>
     </section>
 
     <section class="scroll">
       <h2>Skills</h2>
       <ul>
-        <li>Data: Python, R, Java, Tableau, IBM SPSS, Microsoft Excel</li>
-        <li>Marketing: Google Analytics, Social Media Analytics, Campaign Performance Analysis, Market Segmentation</li>
-        <li>Research: Quantitative & Qualitative Research, Survey Design, Statistical Analysis, Consumer Sentiment Analysis, Database Querying and Visualization</li>
+        <li><b>Tech:</b> Python, R, SQL, Tableau, Java, HTML, IBM SPSS, GitHub, Microsoft Office Suite (Excel, Word, PowerPoint, etc.), Adobe Creative Suite (After Effects, Photoshop, Illustrator, etc.), Canva</li>
+        <li><b>Marketing:</b> Market Research, Competitor Analysis, Brand Persona Development, IMC Development, Marketing Analytics, Campaign Performance Analysis, A/B Testing, ROI Reporting, Social Media Marketing, Graphic Design (Canva/Adobe)</li>
+        <li><b>Research:</b> Database Querying and Visualization, Consumer Sentiment Analysis, Survey Design, Statistical Analysis (Descriptive and Inferential Statistics)</li>
       </ul>
     </section>
 
     <section class="scroll">
       <h2>Interests</h2>
       <ul>
-        <li>UX & Design Psychology</li>
-        <li>Painting, Writing, Travel</li>
-        <li>Supporting marginalized communities</li>
+        <li><b>Professional:</b> AI-Driven Marketing/Advertising, Marketing Operations Automation, Consumer Sentiment Influences in Digital Marketing, AI-Assisted Strategy</li>
+        <li><b>Personal:</b> Content creation, experimental patisserie, hiking, mentoring non-native english speakers, collecting fun mugs!</li>
       </ul>
     </section>
 
