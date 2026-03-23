@@ -255,17 +255,18 @@
     }
 
     .modal-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      position: relative;        /* Required for absolute positioning of the X */
+      display: inline-block;     /* CRITICAL: Container stays the same width as the image */
       max-width: 90%;
+      margin: auto;
     }
 
     .modal-content {
-      max-height: 70vh; /* Keeps the photo from taking over the whole screen */
-      border: 2px solid var(--linen-whisper);
+      display: block;            /* Removes bottom gap in some browsers */
+      max-height: 75vh; 
+      border: 3px solid var(--linen-whisper);
       border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
     }
 
     .modal-caption {
@@ -284,14 +285,21 @@
     }
 
     .close-btn {
-      /* Make sure the close button stays visible on top of the dark modal */
+      position: absolute;
+      top: 10px;                 /* Adjusts distance from the top of the image */
+      right: 15px;               /* Adjusts distance from the right of the image */
       z-index: 1001; 
-      font-size: 2rem;
-      transition: color 0.3s ease;
+      font-size: 2.2rem;
+      color: #F5F1E9;            /* Your beige/cream color */
+      text-decoration: none;     /* Removes the purple/blue underline */
+      line-height: 1;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Adds contrast so it's visible on light photos */
+      transition: transform 0.2s ease, color 0.2s;
     }
 
     .close-btn:hover {
-      color: var(--bg-cream);
+      color: var(--sunfire-glow); /* Turns orange on hover */
+      transform: scale(1.1);
     }
 
     .role {
@@ -302,6 +310,54 @@
     .company {
       font-style: italic;
       font-weight: normal; /* Ensures it is not bold */
+    }
+
+    /* The container holding the image and the X */
+    .image-preview-container {
+      position: relative;
+      display: inline-block; 
+    }
+
+    /* The Exit 'X' Button */
+    .close-button {
+      position: absolute;
+      top: 10px;    /* Distance from the top edge */
+      right: 10px;  /* Distance from the right edge */
+      
+      background: none;
+      border: none;
+      color: #F5F5DC; /* Beige color */
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10;   /* Ensures it stays on top of the image */
+      line-height: 1;
+    }
+
+    .close-button:hover {
+      color: #D2B48C; /* A slightly darker tan/beige for the hover effect */
+    }
+      /* Mobile Responsive Adjustments */
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 20px; /* Gives your content some breathing room on small screens */
+      }
+
+      h1 {
+        font-size: 1.8rem; /* Shrinks your name/header so it doesn't wrap awkwardly */
+      }
+
+      /* If you have a profile or hiking photo, this keeps it from being too wide */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Makes any multi-column layouts stack vertically */
+      .container, .section {
+        display: block;
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -522,40 +578,43 @@
 
 <!-- Modals -->
 <div id="modal1" class="modal">
-  <a href="#" class="close-btn">&times;</a>
   <div class="modal-container">
+    <a href="#" class="close-btn">&times;</a>
     <img src="1762262596936.jpeg" class="modal-content">
     <p class="modal-caption">Me in the process of analyzing data for my research team</p>
   </div>
 </div>
 
 <div id="modal2" class="modal">
-  <a href="#" class="close-btn">&times;</a>
   <div class="modal-container">
+    <a href="#" class="close-btn">&times;</a>
     <img src="1772032228010.jpeg" class="modal-content">
     <p class="modal-caption">The state of my personal research project at the moment...</p>
   </div>
 </div>
 
 <div id="modal3" class="modal">
-  <a href="#" class="close-btn">&times;</a>
   <div class="modal-container">
+    <a href="#" class="close-btn">&times;</a>
     <img src="IMG_1222.jpg" class="modal-content">
     <p class="modal-caption">I just got admitted to grad school at American University's Kogod School of Business!</p>
   </div>
 </div>
 
 <div id="modal4" class="modal">
-  <a href="#" class="close-btn">&times;</a>
   <div class="modal-container">
+    <a href="#" class="close-btn">&times;</a>
     <img src="IMG_3337.jpg" class="modal-content">
-    <p class="modal-caption">A snippet of my content creation..</p>
+    <p class="modal-caption">A snippet of my content creation...</p>
   </div>
 </div>
 
 <div id="modal5" class="modal">
-  <a href="#" class="close-btn">&times;</a>
-  <img src="cafe.png" alt="This is how I'm responding to your email, btw" class="modal-content" loading="lazy">
+  <div class="modal-container">
+    <a href="#" class="close-btn">&times;</a>
+    <img src="cafe.png" class="modal-content">
+    <p class="modal-caption">This is how I'm responding to your email, btw</p>
+  </div>
 </div>
 
   </main>
