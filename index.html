@@ -6,471 +6,814 @@
   <meta name="image" property="og:image" content="header_website.jpg">
   <title>Anzhelika Kipenskaia - Interactive Resume</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-    --deep-velvet: #4F000B;    /* Darkest shade - Headings/H1 */
-    --raspberry: #940031;       /* Medium shade - Accents/H2 */
-    --vibrant-pink: #E2566B;    /* Medium shade - Highlights/Titles */
-    --sunfire-glow: #F27D33;    /* Light shade - Icons/Buttons */
-    --linen-whisper: #FFECD1;   /* Light shade - Section Backgrounds */
-    --bg-cream: #F5F1E9;        /* Page Background (matches image texture) */
-    --text-dark: #2D2D2D;
-  }
-
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
+      --deep-velvet: #4F000B;
+      --raspberry: #940031;
+      --vibrant-pink: #E2566B;
+      --sunfire-glow: #F27D33;
+      --linen-whisper: #FFECD1;
+      --bg-cream: #F5F1E9;
+      --text-dark: #2D2D2D;
+      --text-mid: #555;
     }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       background-color: var(--bg-cream);
       color: var(--text-dark);
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
+    /* ─── DARK MODE TOGGLE ─────────────────────────────────────────── */
+    .theme-toggle {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.2rem;
+      z-index: 999;
+      background: var(--deep-velvet);
+      color: var(--linen-whisper);
+      border: none;
+      border-radius: 50px;
+      padding: 0.45rem 1rem;
+      font-size: 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: background 0.3s, color 0.3s;
+    }
+    .theme-toggle:hover { background: var(--raspberry); }
+
+    body.dark {
+      --bg-cream: #16100C;
+      --text-dark: #F5F1E9;
+      --text-mid: #C4B8AC;
+      --linen-whisper: #2D1E17;
+      
+      /* New overrides to swap raspberry for beige in dark mode */
+      --deep-velvet: var(--sunfire-glow);      /* Forces main headers to beige */
+      --raspberry: #E6DFD3;        /* Forces subheaders/taglines to a soft beige */
+      --dark-mode-beige: #E6DFD3;  /* Used for social links and timeline paths */
+    }
+    body.dark main { background-color: #1E150F; }
+    body.dark .tagline-bar { background: var(--linen-whisper); border-color: var(--linen-whisper); }
+    body.dark .skill-pill { background: #2D1E17; color: var(--linen-whisper); }
+    body.dark .timeline-dot { background: var(--linen-whisper); }
+    body.dark footer { background: #1E150F; color: var(--text-mid); }
+    body.dark .now-card { background: #2D1E17; }
+    body.dark .social-links a { color: var(--dark-mode-beige); }
+    body.dark .profile-pic { border-color: var(--dark-mode-beige); }
+    body.dark .timeline::before { background: linear-gradient(to bottom, var(--dark-mode-beige), var(--linen-whisper)); }
+    body.dark .campaign-card:hover { border-color: var(--dark-mode-beige); }
+    body.dark .project-item:hover { border-left-color: var(--dark-mode-beige); }
+    body.dark .chat-bubble.bubble-left { background: #2D1E17; }
+    body.dark .chat-bubble.bubble-right { background: #241A14; color: var(--text-dark); }
+    body.dark .chat-avatar { border-color: var(--linen-whisper); }
+    body.dark .timeline-photo { border-color: #1E150F; box-shadow: 0 0 0 2px var(--dark-mode-beige); }
+    body.dark .timeline-item.open .timeline-photo { box-shadow: 0 0 0 2px var(--sunfire-glow); }
+
+    /* ─── HERO / HEADER ───────────────────────────────────────────── */
     header {
+      position: relative;
+      overflow: hidden;
+      background: var(--linen-whisper);
+      border-bottom: 3px solid var(--deep-velvet);
+      padding: 5rem 3rem 4rem;
+    }
+
+    .header-noise {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .header-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-      background: linear-gradient(rgba(255, 236, 209, 0.85), rgba(255, 236, 209, 0.85)), url('your-header-image.jpg') no-repeat center/cover;
-      padding: 4rem 2rem;
-      border-bottom: 4px solid var(--deep-velvet);
+      gap: 3rem;
     }
 
     .profile-pic {
-      width: 140px;
-      height: 140px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       object-fit: cover;
-      border: 6px solid var(--raspberry);
-      box-shadow: 0 4px 12px rgba(79, 0, 11, 0.15);
+      border: 5px solid var(--deep-velvet);
+      flex-shrink: 0;
     }
 
-    .header-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    header h1 {
-      font-size: 2.8rem;
-      margin: 0;
+    .header-text h1 {
+      font-size: 3.4rem;
+      font-weight: 600;
       color: var(--deep-velvet);
+      line-height: 1.1;
+      margin-bottom: 0.3rem;
     }
 
-    header p {
-      font-size: 1.1rem;
+    .header-tagline {
+      font-size: 0.95rem;
       color: var(--raspberry);
       font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
     }
 
-    .header-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    
-    .header-container {
-      display: flex;
-      justify-content: space-between; /* Pushes content to opposite sides */
-      align-items: baseline;          /* Aligns text along the same bottom line */
+    .hero-line {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.2rem;
+      max-width: 480px;
     }
 
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-links a {
+      font-size: 1.3rem;
+      color: var(--deep-velvet);
+      text-decoration: none;
+      transition: color 0.25s, transform 0.25s;
+    }
+    .social-links a:hover {
+      color: var(--sunfire-glow);
+      transform: translateY(-3px);
+    }
+
+    /* ─── TAGLINE BAR ─────────────────────────────────────────────── */
+    .tagline-bar {
+      background: var(--deep-velvet);
+      border-bottom: 1px solid var(--linen-whisper);
+      padding: 0.9rem 2rem;
+      text-align: center;
+      font-size: 1.1rem;
+      color: var(--linen-whisper);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ─── MAIN ────────────────────────────────────────────────────── */
     main {
       max-width: 900px;
       margin: 3rem auto;
-      padding: 3rem;
+      padding: 3rem 3.5rem;
       background-color: white;
-      border-radius: 4px; /* Slightly sharper for a professional look */
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      border-radius: 4px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
     }
 
     section {
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
-
     section.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
     h2 {
-      color: var(--raspberry);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--deep-velvet);
       border-bottom: 2px solid var(--linen-whisper);
       padding-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 1.4rem;
-    }
-
-    ul {
-      list-style: none;
-      padding-left: 0;
-      margin-left: 0;
-    }
-
-    ul li {
-      margin-bottom: 0.5rem;
-    }
-
-    .education-item {
       margin-bottom: 1.5rem;
+      letter-spacing: 0.02rem;
+      text-transform: uppercase;
     }
 
-    .education-item strong {
-      display: block;
-      font-size: 1.1rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .education-item span {
-      font-style: italic;
-      color: #555;
-    }
-
-    .experience-item {
-      margin-bottom: 3rem;
-    }
-
-    .experience-title {
-      font-weight: 600;
-      color: var(--coral);
-    }
-
-    .experience-desc {
-      font-size: 0.9rem;
-      color: #555;
-      margin-top: 0.2rem;
-    }
-
-    .carousel, .portfolio-grid {
+    /* ─── NOW SECTION ─────────────────────────────────────────────── */
+    .now-card {
+      background: var(--linen-whisper);
+      border-left: 4px solid var(--sunfire-glow);
+      border-radius: 4px;
+      padding: 1rem 1.5rem;
+      font-size: 0.92rem;
+      color: var(--text-dark);
       display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
+      gap: 0.8rem;
+      align-items: flex-start;
+    }
+    .now-card strong { color: var(--deep-velvet); }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 700px;
+      margin: 0 auto;
     }
 
-    .carousel::-webkit-scrollbar {
-      display: none;
+    /* Asymmetrical border-radius to create the "speech bubble" tail */
+    .bubble-left {
+      background: var(--linen-whisper);
+      border-radius: 18px 18px 18px 4px;
+      border-left: 4px solid var(--sunfire-glow);
     }
 
-    .carousel img, .portfolio-grid img {
-      height: 180px;
-      border-radius: 10px;
-      scroll-snap-align: start;
+    .bubble-right {
+      background: var(--linen-whisper);
+      border-radius: 18px 18px 4px 18px;
+      border-right: 4px solid var(--sunfire-glow);
+      border-left: none;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
     }
 
+    .chat-bubble {
+      padding: 1.1rem 1.4rem;
+      font-size: 0.92rem;
+      color: var(--text-dark);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      max-width: 75%;
+    }
+
+    .chat-bubble-wrapper {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.8rem;
+      width: 100%;
+    }
+
+    .bubble-incoming {
+      justify-content: flex-start;
+    }
+
+    .bubble-outgoing {
+      justify-content: flex-end;
+    }
+
+    .chat-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--linen-whisper);
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .chat-bubble strong { color: var(--deep-velvet); }
+
+    /* ─── ABOUT ───────────────────────────────────────────────────── */
+    .about-text { font-size: 0.97rem; color: var(--text-mid); margin-bottom: 1.5rem; }
 
     .portfolio-carousel {
       display: flex;
-      gap: 1rem;
+      gap: 0.9rem;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
       -ms-overflow-style: none;
-      padding: 1rem 0;
+      padding-bottom: 0.5rem;
     }
-
-    .portfolio-grid {
-      flex-wrap: wrap;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-
-    .portfolio-grid a {
-      flex: 1 1 30%;
-      margin-bottom: 1rem;
-    }
-
-    .portfolio-grid img:hover {
-      transform: scale(1.05);
-      transition: transform 0.3s ease;
-    }
-
-    .portfolio-carousel::-webkit-scrollbar {
-      display: none;
-    }
-
+    .portfolio-carousel::-webkit-scrollbar { display: none; }
+    .portfolio-carousel a { flex-shrink: 0; }
     .portfolio-carousel img {
-      height: 200px;
-      border-radius: 12px;
-      scroll-snap-align: center;
+      height: 190px;
+      width: auto;
+      border-radius: 10px;
+      scroll-snap-align: start;
       object-fit: cover;
-      flex-shrink: 0;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     .portfolio-carousel img:hover {
-      transform: scale(1.05);
+      transform: scale(1.04);
+      box-shadow: 4px 4px 0 var(--raspberry);
     }
 
+    /* ─── TIMELINE ────────────────────────────────────────────────── */
+    .timeline {
+      position: relative;
+      padding-left: 3.5rem; /* Increased padding to give photos breathing room */
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 1.15rem; /* Repositioned center spine line to match image center */
+      top: 0.8rem;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--raspberry), var(--linen-whisper));
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      cursor: pointer;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    
+    /* Container for the photo positioning over the vertical line */
+    .timeline-img-container {
+      position: absolute;
+      left: -3.5rem;
+      top: 0;
+      width: 40px;
+      height: 40px;
+      z-index: 2;
+    }
+
+    .timeline-photo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--bg-cream);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--raspberry);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    }
+
+    .timeline-content {
+      flex: 1;
+    }
+
+    /* Hover States */
+    .timeline-item:hover .timeline-photo { 
+      transform: scale(1.15); 
+    }
+    
+    /* Expanded States */
+    .timeline-item.open .timeline-photo { 
+      transform: scale(1.55); 
+      box-shadow: 0 0 0 2px var(--sunfire-glow); 
+    }
+
+    .timeline-year {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sunfire-glow);
+      margin-bottom: 0.2rem;
+    }
+    .timeline-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--deep-velvet);
+    }
+    .timeline-sub {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      font-style: italic;
+    }
+    .timeline-detail {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      margin-top: 0.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .timeline-item.open .timeline-detail { max-height: 200px; }
+
+    /* ─── EDUCATION ───────────────────────────────────────────────── */
+    .education-item {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--linen-whisper);
+    }
+    .education-item:last-child { border-bottom: none; }
+    .edu-school {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--deep-velvet);
+    }
+    .edu-degree { font-size: 0.92rem; color: var(--text-mid); font-style: italic; }
+    .edu-meta {
+      font-size: 0.82rem;
+      color: var(--sunfire-glow);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-top: 0.2rem;
+    }
+
+    /* ─── CAMPAIGNS ──────────────────────────────────────────────── */
+    .campaign-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .campaign-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .campaign-card:hover {
+      border-color: var(--raspberry);
+      box-shadow: 4px 4px 0 var(--deep-velvet);
+    }
+    .campaign-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .campaign-card:hover img { transform: scale(1.06); }
+    .campaign-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(79,0,11,0.85) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 0.8rem;
+    }
+    .campaign-card:hover .campaign-overlay { opacity: 1; }
+    .campaign-overlay span {
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* ─── EXPERIENCE ─────────────────────────────────────────────── */
+    .experience-item {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--linen-whisper);
+    }
+    .experience-item:last-child { border-bottom: none; margin-bottom: 0; }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.6rem;
+    }
+    .exp-role {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--deep-velvet);
+    }
+    .exp-company {
+      font-size: 0.85rem;
+      color: var(--raspberry);
+      font-style: italic;
+    }
+    .exp-dates {
+      font-size: 0.78rem;
+      color: var(--sunfire-glow);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+    ul.bullets {
+      list-style: none;
+      padding: 0;
+    }
+    ul.bullets li {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      margin-bottom: 0.35rem;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    ul.bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--vibrant-pink);
+    }
+
+    /* ─── PROJECTS ───────────────────────────────────────────────── */
+    .project-item {
+      margin-bottom: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      border-left: 3px solid var(--linen-whisper);
+      transition: border-color 0.25s;
+    }
+    .project-item:hover { border-color: var(--vibrant-pink); }
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--deep-velvet);
+      margin-bottom: 0.2rem;
+    }
+    .project-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--linen-whisper);
+      color: var(--raspberry);
+      border: 1px solid var(--raspberry);
+      border-radius: 20px;
+      padding: 0.15rem 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+    .project-badge.ongoing { background: #fff0f0; border-color: var(--sunfire-glow); color: var(--sunfire-glow); }
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+    }
+
+    /* ─── SKILLS ─────────────────────────────────────────────────── */
+    .skill-group { margin-bottom: 1.2rem; }
+    .skill-group-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--raspberry);
+      margin-bottom: 0.5rem;
+    }
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .skill-pill {
+      font-size: 0.8rem;
+      background: var(--linen-whisper);
+      color: var(--deep-velvet);
+      border-radius: 20px;
+      padding: 0.3rem 0.8rem;
+      font-weight: 400;
+      transition: background 0.2s, color 0.2s;
+    }
+    .skill-pill:hover { background: var(--deep-velvet); color: var(--linen-whisper); }
+
+    /* ─── INTERESTS ─────────────────────────────────────────────── */
+    .interest-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .interest-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+    }
+    .interest-item i { color: var(--vibrant-pink); font-size: 0.85rem; }
+
+    /* ─── MODALS ─────────────────────────────────────────────────── */
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0,0,0,0.85);
       z-index: 1000;
       align-items: center;
       justify-content: center;
-      overflow-y: auto; /* Adds a scrollbar if the image is too tall for the screen */
-      transition: opacity 0.3s ease;
+      overflow-y: auto;
     }
-
-    .modal:target {
-      display: flex;
-    }
-
-    footer {
-      background-color: var(--yellow);
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      margin-top: 2rem;
-    }
-
-    .social-links {
-      margin-top: 1rem;
-      display: flex;
-      gap: 1.2rem;
-    }
-
-    .social-links a {
-      font-size: 1.5rem;
-      color: var(--deep-velvet); /* Professional dark anchor color */
-      transition: transform 0.3s ease, color 0.3s ease;
-      text-decoration: none;
-    }
-
-    .social-links a:hover {
-      color: var(--sunfire-glow); /* Pops to orange when you hover */
-      transform: translateY(-3px); /* Subtle bounce effect */
-    }
-
+    .modal:target { display: flex; }
     .modal-container {
-      position: relative;        /* Required for absolute positioning of the X */
-      display: flex;     /* CRITICAL: Container stays the same width as the image */
-      flex-direction: column; 
+      position: relative;
+      display: flex;
+      flex-direction: column;
       align-items: center;
       max-width: 90%;
-      max-height: 95vh;     /* Keeps the whole thing within view */
       margin: auto;
     }
-
     .modal-content {
-      display: block;            /* Removes bottom gap in some browsers */
-      max-width: 100%;      /* Ensures image doesn't overflow container */
-      max-height: 70vh;     /* Leaves room for the caption below */
+      display: block;
+      max-width: 100%;
+      max-height: 70vh;
       border: 3px solid var(--linen-whisper);
       border-radius: 8px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-      object-fit: contain;  /* Maintains aspect ratio */
-
+      object-fit: contain;
     }
-
     .modal-caption {
-      color: var(--deep-velvet); /* Soft cream text */
-      background-color: var(--linen-whisper); /* Dark anchor background */
+      color: var(--deep-velvet);
+      background-color: var(--linen-whisper);
       padding: 1rem 2rem;
       margin-top: 15px;
       border-radius: 4px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
       text-align: center;
       max-width: 80%;
-      line-height: 1.4;
-      /* Optional: adds a slight "aesthetic" touch */
-      border-left: 3px solid var(--vibrant-pink); 
+      border-left: 3px solid var(--vibrant-pink);
     }
-
     .close-btn {
       position: absolute;
-      top: 10px;                 /* Adjusts distance from the top of the image */
-      right: 15px;               /* Adjusts distance from the right of the image */
-      z-index: 1001; 
+      top: 10px;
+      right: 15px;
+      z-index: 1001;
       font-size: 2.2rem;
-      color: #F5F1E9;            /* Your beige/cream color */
-      text-decoration: none;     /* Removes the purple/blue underline */
+      color: #F5F1E9;
+      text-decoration: none;
       line-height: 1;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Adds contrast so it's visible on light photos */
-      transition: transform 0.2s ease, color 0.2s;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      transition: transform 0.2s, color 0.2s;
+    }
+    .close-btn:hover { color: var(--sunfire-glow); transform: scale(1.1); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      background: var(--linen-whisper);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      border-top: 2px solid var(--deep-velvet);
     }
 
-    .close-btn:hover {
-      color: var(--sunfire-glow); /* Turns orange on hover */
-      transform: scale(1.1);
-    }
-
-    .role {
-      margin: 0;
-      font-size: 1.2rem; /* Adjust as needed */
-    }
-    
-    .company {
-      font-style: italic;
-      font-weight: normal; /* Ensures it is not bold */
-    }
-
-    /* The container holding the image and the X */
-    .image-preview-container {
-      position: relative;
-      display: inline-block; 
-    }
-
-    /* The Exit 'X' Button */
-    .close-button {
-      position: absolute;
-      top: 10px;    /* Distance from the top edge */
-      right: 10px;  /* Distance from the right edge */
-      
-      background: none;
-      border: none;
-      color: #F5F5DC; /* Beige color */
-      font-size: 24px;
-      font-weight: bold;
-      cursor: pointer;
-      z-index: 10;   /* Ensures it stays on top of the image */
-      line-height: 1;
-    }
-
-    .close-button:hover {
-      color: #D2B48C; /* A slightly darker tan/beige for the hover effect */
-    }
-      /* Mobile Responsive Adjustments */
-    @media screen and (max-width: 600px) {
-      body {
-        padding: 20px; /* Gives your content some breathing room on small screens */
-      }
-
-      h1 {
-        font-size: 1.8rem; /* Shrinks your name/header so it doesn't wrap awkwardly */
-      }
-
-      /* If you have a profile or hiking photo, this keeps it from being too wide */
-      img {
-        max-width: 100%;
-        height: auto;
-      }
-
-      /* Makes any multi-column layouts stack vertically */
-      .container, .section {
-        display: block;
-        width: 100%;
-      }
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 680px) {
+      header { padding: 3rem 1.5rem 2.5rem; }
+      .header-inner { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+      .header-text h1 { font-size: 2.4rem; }
+      main { padding: 2rem 1.5rem; margin: 1.5rem; }
+      .campaign-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+  <button class="theme-toggle" onclick="document.body.classList.toggle('dark')">
+    ◐ Dark Mode
+  </button>
+
   <header>
-    <img src="100_1247 (1).jpg" alt="Anzhelika Kipenskaia" class="profile-pic" />
-    <div class="header-text">
-      <h1>Angelika Kipenskaia</h1>
-      <p>Marketing | Information Systems | Psychology</p>
-      
-      <div class="social-links">
-        <a href="mailto:akipenskaia@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-        <a href="https://www.linkedin.com/in/angelika-kipenskaia-3576b6268/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://www.instagram.com/angelikaakipp" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.tiktok.com/@angelakip" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+    <div class="header-noise"></div>
+    <div class="header-inner">
+      <img src="headshot photobooth cropped.png" alt="Anzhelika Kipenskaia" class="profile-pic" />
+      <div class="header-text">
+        <p class="header-tagline">Marketing · Data · Psychology</p>
+        <h1>Angelika Kipenskaia</h1>
+        <p class="hero-line">Where consumer psychology meets data-driven strategy + AI.</p>
+        <div class="social-links">
+          <a href="mailto:akipenskaia@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/angelika-kipenskaia-3576b6268" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="https://www.instagram.com/angelikaakipp" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@angelikakip" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
       </div>
     </div>
   </header>
 
+  <div class="tagline-bar">
+    "I studied why people feel things... now I use data to prove it."
+  </div>
+
   <main>
+
+    <!-- NOW SECTION -->
+    <section class="scroll">
+      <h2>Now</h2>
+      <div class="chat-container">
+        
+        <!-- Message 1: Research (Left / Sender A) -->
+        <div class="chat-bubble-wrapper bubble-incoming">
+          <img src="research.png" alt="Research" class="chat-avatar" />
+          <div class="chat-bubble bubble-left">
+            <div>
+              <strong>Running 2 research studies:</strong> on the ROI of AI-generated advertising & on emotional engagement mechanisms in social media.
+            </div>
+          </div>
+        </div>
+
+        <!-- Message 2: Education (Right / Sender B) -->
+        <div class="chat-bubble-wrapper bubble-outgoing">
+          <div class="chat-bubble bubble-right">
+            <div>
+              Recently graduated from Towson University in May 2026; heading to <strong>American University's Kogod School of Business</strong> for an M.S. in Marketing with Specialization in Marketing Analytics in August 2026.
+            </div>
+          </div>
+          <img src="graduation.jpg" alt="Graduation" class="chat-avatar" />
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
     <section class="scroll">
       <h2>About Me</h2>
-      <p>Hi, I’m Angelika - a professional in the DMV area who is passionate about the integration of marketing, technology, and psychology. My particular interests currently lie at the intersection of those fields and the growing AI landscape.</p>
-      
-      <div class="portfolio-carousel" id="portfolioCarousel">
-        <a href="#modal1"><img src="1762262596936.jpeg" alt="Me in the process of analyzing data for my research team" loading="lazy" /></a>
-        <a href="#modal2"><img src="1772032228010.jpeg" alt="The state of my personal research project at the moment..." loading="lazy" /></a>
-        <a href="#modal3"><img src="IMG_4147.jpg" alt="I'm happy to announce that I will be pursuing my M.S. in Marketing Analytics at American University's Kogod School of Business!" loading="lazy" /></a>
-        <a href="#modal4"><img src="IMG_3337.jpg" alt="Here's a snippet of how my content creation is going" loading="lazy" /></a>
-        <a href="#modal5"><img src="cafe.png" alt="This is how I'm responding to your email, btw" loading="lazy" /></a>
-      </div>
-
+      <p class="about-text">Hi, I'm Angelika — a DMV-based professional passionate about the intersection of marketing, technology, and psychology. I think a lot about how humans make decisions, and I use data, research, and creative strategy to do something useful with that. Right now, that means chasing questions about AI's role in the future of advertising.</p>
     </section>
 
+    <!-- JOURNEY / TIMELINE -->
     <section class="scroll">
-      <h2>Education</h2>
-    
-      <div class="education-item">
-        <div class="row">
-          <b>Towson University</b>
-        </div>
-        
-        <div class="row">
-          <span class="degree">B.S. in Psychology, minors: Marketing, Information Systems</span>
-        </div>
-        <div class="row">
-          <span class="dates">January 2022 – May 2026</span>
-        </div>
-        <div class="row">
-          <span class="dates">GPA: 3.94/4.0</span>
-        </div>
-      </div>
+      <h2>My Journey</h2>
+      <p style="font-size:0.85rem; color:var(--text-mid); margin-bottom:1.5rem; font-style:italic;">Click any milestone to expand ↓</p>
+      <div class="timeline">
 
-      <div class="education-item">
-        <div class="row">
-          <b>American University</b>
+        <div class="timeline-item" onclick="this.classList.toggle('open')">
+          <div class="timeline-img-container">
+            <img src="chatham_hall.jpg" alt="Chatham Hall" class="timeline-photo" />
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-year">2018-2021</div>
+            <div class="timeline-title">Full-Ride Scholarship — Chatham Hall</div>
+            <div class="timeline-sub">Chatham Hall, Chatham, VA</div>
+            <div class="timeline-detail">Won a competitive full-ride scholarship to Chatham Hall, a prestigious private all-girls boarding school in Chatham, Virginia. This was a formative experience that sharpened my independence, intellectual drive, and interest in human behavior.</div>
+          </div>
         </div>
-        <div class="row">
-          <span class="degree">M.S. in Marketing with Specialization in Marketing Analytics</span>
+
+        <div class="timeline-item" onclick="this.classList.toggle('open')">
+          <div class="timeline-img-container">
+            <img src="towson.jpg" alt="TU" class="timeline-photo" />
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-year">Jan 2022 – May 2026</div>
+            <div class="timeline-title">B.S. Psychology — Towson University</div>
+            <div class="timeline-sub">Minors: Marketing, Information Systems · GPA: 3.94/4.0</div>
+            <div class="timeline-detail">Included 4 years of coursework, research, internships, and independent study at the intersection of consumer behavior, marketing, and data analysis. Conducted research in psychology and marketing, secured 2 on-campus jobs and an internship, and co-presented at research conferences.</div>
+          </div>
         </div>
-        <div class="row">
-          <span class="dates">August 2026 – August 2027</span>
+
+        <div class="timeline-item" onclick="this.classList.toggle('open')">
+          <div class="timeline-img-container">
+            <img src="research.jpeg" alt="Research" class="timeline-photo" />
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-year">2025 – Present</div>
+            <div class="timeline-title">Independent Researcher — AI & Marketing</div>
+            <div class="timeline-sub">Towson University (ongoing)</div>
+            <div class="timeline-detail">Currently leading 2 self-directed studies: investigating the financial ROI of AI-generated advertising, and quantifying emotional engagement mechanisms in social media algorithms. Both are in the process of data collection.</div>
+          </div>
         </div>
+
+        <div class="timeline-item" onclick="this.classList.toggle('open')">
+          <div class="timeline-img-container">
+            <img src="kogod.jpg" alt="AU" class="timeline-photo" />
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-year">Aug 2026 – Aug 2027</div>
+            <div class="timeline-title">M.S. Marketing Analytics — American University</div>
+            <div class="timeline-sub">Kogod School of Business · Starting Fall 2026</div>
+            <div class="timeline-detail">Pursuing a M.S. on Marketing with a Specialization in Marketing Analytics at American University's Kogod School of Business. Looking to deepen expertise in data-driven marketing strategy and AI business applications.</div>
+          </div>
+        </div>
+
       </div>
     </section>
-    
+
+    <!-- MARKETING CAMPAIGNS -->
     <section class="scroll">
       <h2>Marketing Campaigns</h2>
-      <div class="portfolio-carousel">
-        <a href="coca-cola-gen-z.pdf" target="_blank" rel="noopener noreferrer">
-          <img src="coca-cola-gen-z_thumbnail.jpg" alt="Coca-Cola + Gen Z Marketing Campaign" loading="lazy" />
+      <p style="font-size:0.85rem; color:var(--text-mid); margin-bottom:1rem; font-style:italic;">Hover to preview · Click to open PDF ↓</p>
+      <div class="campaign-grid">
+        <a class="campaign-card" href="coca-cola-gen-z.pdf" target="_blank" rel="noopener">
+          <img src="coca-cola-gen-z_thumbnail.jpg" alt="Coca-Cola + Gen Z Campaign" loading="lazy" />
+          <div class="campaign-overlay"><span>Coca-Cola × Gen Z — View PDF</span></div>
         </a>
-        
-        <a href="elf-campaign.pdf" target="_blank" rel="noopener noreferrer">
-          <img src="elf-campaign-thumbnail.jpg" alt="E.L.F. Brand Extension Proposal" loading="lazy" />
+        <a class="campaign-card" href="elf-campaign.pdf" target="_blank" rel="noopener">
+          <img src="elf-campaign-thumbnail.jpg" alt="E.L.F. Brand Extension" loading="lazy" />
+          <div class="campaign-overlay"><span>e.l.f. Brand Extension — View PDF</span></div>
         </a>
-
-        <a href="rhode_summer.pdf" target="_blank" rel="noopener noreferrer">
-          <img src="rhode_summer_thumbnail.jpg" alt="The Strategy Stand-Off: Rhode vs. Summer Fridays" loading="lazy" />
+        <a class="campaign-card" href="rhode_summer.pdf" target="_blank" rel="noopener">
+          <img src="rhode_summer_thumbnail.jpg" alt="Rhode vs. Summer Fridays" loading="lazy" />
+          <div class="campaign-overlay"><span>Rhode vs. Summer Fridays — View PDF</span></div>
         </a>
-        
-        </div>
+      </div>
     </section>
 
+    <!-- PROFESSIONAL EXPERIENCE -->
     <section class="scroll">
       <h2>Professional Experience</h2>
+
       <div class="experience-item">
-        <div class="header-container">
-          <h3 class="role">Content Marketing Consultant</h3>
-          <span class="company">Nissan Communications Network</span>
+        <div class="exp-header">
+          <span class="exp-role">Content Marketing Consultant</span>
+          <span class="exp-company">Nissan Communications Network</span>
         </div>
-        <ul>
+        <div class="exp-dates">2024 – 2025</div>
+        <ul class="bullets" style="margin-top:0.6rem;">
           <li>Supported rebranding efforts by developing digital content strategies</li>
           <li>Designed brand elements and social media content to strengthen brand identity across platforms</li>
-          <li>Drove a nearly 200% increase in audience engagement through consistent, strategically aligned content</li>
+          <li>Drove a nearly <strong>200% increase</strong> in audience engagement through strategically aligned content</li>
         </ul>
       </div>
 
       <div class="experience-item">
-        <div class="header-container">
-          <h3 class="role">Marketing Student Director</h3>
-          <span class="company">Towson University</span>
+        <div class="exp-header">
+          <span class="exp-role">Marketing Student Director</span>
+          <span class="exp-company">Towson University</span>
         </div>
-        <ul>
+        <div class="exp-dates">2023 – 2025</div>
+        <ul class="bullets" style="margin-top:0.6rem;">
           <li>Developed and executed digital marketing campaigns targeting prospective students and families</li>
           <li>Created social media content and promotional materials to increase awareness and engagement</li>
           <li>Collaborated on outreach initiatives that improved audience interaction and program visibility</li>
@@ -478,11 +821,12 @@
       </div>
 
       <div class="experience-item">
-        <div class="header-container">
-          <h3 class="role">Community Center Manager</h3>
-          <span class="company">Towson University</span>
+        <div class="exp-header">
+          <span class="exp-role">Community Center Manager</span>
+          <span class="exp-company">Towson University</span>
         </div>
-        <ul>
+        <div class="exp-dates">2022 – 2023</div>
+        <ul class="bullets" style="margin-top:0.6rem;">
           <li>Oversaw daily operations of a residential community center and supervised student employees</li>
           <li>Coordinated community programs and events to enhance resident engagement</li>
           <li>Managed scheduling, training, and compliance while fostering a welcoming environment</li>
@@ -490,200 +834,179 @@
       </div>
 
       <div class="experience-item">
-        <div class="header-container">
-          <h3 class="role">Research Assistant</h3>
-          <span class="company">Towson University</span>
+        <div class="exp-header">
+          <span class="exp-role">Research Assistant</span>
+          <span class="exp-company">Towson University</span>
         </div>
-        <ul>
-          <li>Managed scheduling, training, and compliance while fostering a welcoming environment</li>
-          <li>Conducted data collection, cleaning, and analysis, and managed VR experimental simulations</li>
-          <li>Co-presented research at psychological conferences</li>
+        <div class="exp-dates">2023 – 2025</div>
+        <ul class="bullets" style="margin-top:0.6rem;">
+          <li>Conducted data collection, cleaning, and analysis; managed VR experimental simulations</li>
+          <li>Developed Python programs to automate physiological data extraction and processing</li>
+          <li>Co-presented findings at psychological conferences</li>
         </ul>
       </div>
     </section>
 
+    <!-- SELECTED PROJECTS -->
     <section class="scroll">
       <h2>Selected Projects</h2>
-      <div class="experience-item">
-        <div class="header-container">
-          <h3 class="role">ROI of AI: Quantifying the Short- and Long-term Revenue Impacts of AI-Generated Advertising Across Common and Luxury Goods</h3>
-          <span class="company">Ongoing</span>
-        </div>
-        <ul>
-          <li>Independent Study: Investigating the net financial impact of AI implementation, focusing on the balance between cost reduction and long-term ROI adjusted for customer loss risk</li>
-        </ul>
+
+      <div class="project-item">
+        <div class="project-badge ongoing">Ongoing Research</div>
+        <div class="project-title">ROI of AI: Quantifying Revenue Impacts of AI-Generated Advertising</div>
+        <p class="project-desc">Independent study investigating the net financial impact of AI-generated ads, weighing cost reduction against long-term customer retention risk across common and luxury goods categories.</p>
       </div>
 
-      <div class="experience-item">
-        <div class="header-container">
-          <h3 class="role">Rage Bait: Evaluating the Effectiveness of Emotional Appeals on Consumer Engagement in Social Media Marketing</h3>
-          <span class="company">Ongoing</span>
-        </div>
-        <ul>
-          <li>Independent Study: Determining the most significant emotional drivers of consumer engagement for different content types via personal social media</li>
-        </ul>
+      <div class="project-item">
+        <div class="project-badge ongoing">Ongoing Research</div>
+        <div class="project-title">Rage Bait: Emotional Appeals & Consumer Engagement in Social Media</div>
+        <p class="project-desc">Determining the most significant emotional drivers of consumer engagement across content types — using my own social media as a live experimental platform.</p>
       </div>
 
-      <div class="experience-item">
-        <div class="header-container">
-          <h3 class="role">AI for Data Analysis Optimization in Behavioral Research</h3>
-          <span class="company">2025</span>
-        </div>
-        <ul>
-          <li>Developed Python programs to optimize data cleaning and physiological data extraction</li>
-        </ul>
+      <div class="project-item">
+        <div class="project-badge">2025</div>
+        <div class="project-title">AI for Data Analysis Optimization in Behavioral Research</div>
+        <p class="project-desc">Developed Python programs to streamline data cleaning and physiological data extraction in an active behavioral research lab.</p>
       </div>
 
-      <div class="experience-item">
-        <div class="header-container">
-          <h3 class="role">Brand Extension Strategy: e.l.f. Cosmetics</h3>
-          <span class="company">2025</span>
-        </div>
-        <ul>
-          <li>Created a brand extension concept aligned with e.l.f.’s brand equity and Gen Z consumer preferences</li>
-          <li>Conducted market analysis to evaluate brand fit, positioning, and growth potential</li>
-        </ul>
+      <div class="project-item">
+        <div class="project-badge">2025</div>
+        <div class="project-title">Brand Extension Strategy: e.l.f. Cosmetics</div>
+        <p class="project-desc">Designed a brand extension concept grounded in e.l.f.'s brand equity and Gen Z consumer preferences; backed by market analysis evaluating brand fit and growth potential.</p>
       </div>
 
-
-      <div class="experience-item">
-        <div class="header-container">
-          <h3 class="role">Marketing Campaign Analysis: American Eagle</h3>
-          <span class="company">2025</span>
-        </div>
-        <ul>
-          <li>Conducted a critical analysis of American Eagle’s viral ad campaign featuring Sydney Sweeney</li>
-          <li>Evaluated brand alignment, audience reception, and cultural impact through a consumer behavior lens</li>
-        </ul>
+      <div class="project-item">
+        <div class="project-badge">2025</div>
+        <div class="project-title">Marketing Campaign Analysis: American Eagle × Sydney Sweeney</div>
+        <p class="project-desc">Critical analysis of American Eagle's viral campaign — evaluating brand alignment, audience reception, and cultural impact through a consumer behavior lens.</p>
       </div>
 
-      <div class="experience-item">
-        <div class="header-container">
-          <h3 class="role">Integrated Marketing Campaign Development: Coca-Cola</h3>
-          <span class="company">2025</span>
-        </div>
-        <ul>
-          <li>Developed a data-informed marketing campaign to increase social media engagement among Gen Z consumers</li>
-        </ul>
+      <div class="project-item">
+        <div class="project-badge">2025</div>
+        <div class="project-title">Integrated Marketing Campaign: Coca-Cola × Gen Z</div>
+        <p class="project-desc">Data-informed campaign strategy to grow Coca-Cola's social media engagement among Gen Z consumers, presented as a full IMC proposal.</p>
       </div>
 
-      <div class="experience-item">
-        <div class="header-container">
-          <h3 class="role">Product Prototype & Marketing Strategy: Hair Analyzer Pro</h3>
-          <span class="company">2024</span>
-        </div>
-        <ul>
-          <li>Designed a consumer product prototype that analyzes hair type and health to deliver personalized recommendations</li>
-          <li>Developed a corresponding marketing strategy targeting differentiated consumer segments</li>
-        </ul>
+      <div class="project-item">
+        <div class="project-badge">2024</div>
+        <div class="project-title">Product Prototype & Marketing Strategy: Hair Analyzer Pro</div>
+        <p class="project-desc">Designed a consumer product concept that analyzes hair type and health to generate personalized recommendations; built a full go-to-market strategy for segmented consumer groups.</p>
       </div>
     </section>
 
+    <!-- SKILLS -->
     <section class="scroll">
       <h2>Skills</h2>
-      <ul>
-        <li><b>Tech:</b> Python, R, SQL, Tableau, Java, HTML, IBM SPSS, GitHub, Microsoft Office Suite (Excel, Word, PowerPoint, etc.), Adobe Creative Suite (After Effects, Photoshop, Illustrator, etc.), Canva</li>
-        <li><b>Marketing:</b> Market Research, Competitor Analysis, Brand Persona Development, IMC Development, Marketing Analytics, Campaign Performance Analysis, A/B Testing, ROI Reporting, Social Media Marketing, Graphic Design (Canva/Adobe)</li>
-        <li><b>Research:</b> Database Querying and Visualization, Consumer Sentiment Analysis, Survey Design, Statistical Analysis (Descriptive and Inferential Statistics)</li>
-      </ul>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Tech & Tools</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python</span><span class="skill-pill">R</span><span class="skill-pill">SQL</span>
+          <span class="skill-pill">Tableau</span><span class="skill-pill">Java</span><span class="skill-pill">HTML/CSS</span>
+          <span class="skill-pill">IBM SPSS</span><span class="skill-pill">GitHub</span><span class="skill-pill">Excel</span>
+          <span class="skill-pill">After Effects</span><span class="skill-pill">Photoshop</span><span class="skill-pill">Illustrator</span>
+          <span class="skill-pill">Canva</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Marketing</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Market Research</span><span class="skill-pill">Competitor Analysis</span>
+          <span class="skill-pill">Brand Persona Dev.</span><span class="skill-pill">IMC Development</span>
+          <span class="skill-pill">Marketing Analytics</span><span class="skill-pill">A/B Testing</span>
+          <span class="skill-pill">ROI Reporting</span><span class="skill-pill">Social Media Marketing</span>
+          <span class="skill-pill">Graphic Design</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Research</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Consumer Sentiment Analysis</span><span class="skill-pill">Survey Design</span>
+          <span class="skill-pill">Descriptive & Inferential Stats</span><span class="skill-pill">DB Querying & Viz</span>
+          <span class="skill-pill">VR Experimental Research</span>
+        </div>
+      </div>
     </section>
 
+    <!-- INTERESTS -->
     <section class="scroll">
       <h2>Interests</h2>
-      <ul>
-        <li><b>Professional:</b> AI-Driven Marketing/Advertising, Marketing Operations Automation, Consumer Sentiment Influences in Digital Marketing, AI-Assisted Strategy</li>
-        <li><b>Personal:</b> Content creation, experimental patisserie, hiking, mentoring non-native english speakers, collecting fun mugs!</li>
-      </ul>
+      <div style="margin-bottom:0.8rem;">
+        <div class="skill-group-label">Professional</div>
+        <div class="interest-list">
+          <div class="interest-item"><i class="fas fa-robot"></i> AI-Driven Marketing</div>
+          <div class="interest-item"><i class="fas fa-cogs"></i> Marketing Ops Automation</div>
+          <div class="interest-item"><i class="fas fa-heart-pulse"></i> Consumer Sentiment</div>
+          <div class="interest-item"><i class="fas fa-chart-line"></i> AI-Assisted Strategy</div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">Personal</div>
+        <div class="interest-list">
+          <div class="interest-item"><i class="fas fa-video"></i> Content creation</div>
+          <div class="interest-item"><i class="fas fa-cake-candles"></i> Experimental patisserie</div>
+          <div class="interest-item"><i class="fas fa-mountain"></i> Hiking</div>
+          <div class="interest-item"><i class="fas fa-language"></i> Mentoring non-native English speakers</div>
+          <div class="interest-item"><i class="fas fa-mug-hot"></i> Collecting fun mugs</div>
+        </div>
+      </div>
     </section>
-
-
-<!-- Modals -->
-<div id="modal1" class="modal">
-  <div class="modal-container">
-    <a href="#" class="close-btn">&times;</a>
-    <img src="1762262596936.jpeg" class="modal-content">
-    <p class="modal-caption">Me in the process of analyzing data for my research team</p>
-  </div>
-</div>
-
-<div id="modal2" class="modal">
-  <div class="modal-container">
-    <a href="#" class="close-btn">&times;</a>
-    <img src="1772032228010.jpeg" class="modal-content">
-    <p class="modal-caption">The state of my personal research project at the moment...</p>
-  </div>
-</div>
-
-<div id="modal3" class="modal">
-  <div class="modal-container">
-    <a href="#" class="close-btn">&times;</a>
-    <img src="IMG_4147.jpg" class="modal-content">
-    <p class="modal-caption">I'm happy to announce that I will be pursuing my M.S. in Marketing Analytics at American University's Kogod School of Business!</p>
-  </div>
-</div>
-
-<div id="modal4" class="modal">
-  <div class="modal-container">
-    <a href="#" class="close-btn">&times;</a>
-    <img src="IMG_3337.jpg" class="modal-content">
-    <p class="modal-caption">A snippet of my content creation...</p>
-  </div>
-</div>
-
-<div id="modal5" class="modal">
-  <div class="modal-container">
-    <a href="#" class="close-btn">&times;</a>
-    <img src="cafe.png" class="modal-content">
-    <p class="modal-caption">This is how I'm responding to your email, btw</p>
-  </div>
-</div>
 
   </main>
 
+  <!-- MODALS -->
+  <div id="modal1" class="modal">
+    <div class="modal-container">
+      <a href="#" class="close-btn">&times;</a>
+      <img src="1762262596936.jpeg" class="modal-content" alt="">
+      <p class="modal-caption">Me in the process of analyzing data for my research team</p>
+    </div>
+  </div>
+  <div id="modal2" class="modal">
+    <div class="modal-container">
+      <a href="#" class="close-btn">&times;</a>
+      <img src="1772032228010.jpeg" class="modal-content" alt="">
+      <p class="modal-caption">The state of my personal research project at the moment...</p>
+    </div>
+  </div>
+  <div id="modal3" class="modal">
+    <div class="modal-container">
+      <a href="#" class="close-btn">&times;</a>
+      <img src="IMG_4147.jpg" class="modal-content" alt="">
+      <p class="modal-caption">Heading to American University's Kogod School of Business this fall!</p>
+    </div>
+  </div>
+  <div id="modal4" class="modal">
+    <div class="modal-container">
+      <a href="#" class="close-btn">&times;</a>
+      <img src="IMG_3337.jpg" class="modal-content" alt="">
+      <p class="modal-caption">A snippet of my content creation...</p>
+    </div>
+  </div>
+  <div id="modal5" class="modal">
+    <div class="modal-container">
+      <a href="#" class="close-btn">&times;</a>
+      <img src="cafe.png" class="modal-content" alt="">
+      <p class="modal-caption">This is how I'm responding to your email, btw</p>
+    </div>
+  </div>
+
   <footer>
-    &copy; 2026 Angelika Kipenskaia • All rights reserved
+    &copy; 2026 Angelika Kipenskaia &nbsp;·&nbsp; All rights reserved
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Scroll animation
-      const sections = document.querySelectorAll(".scroll");
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.scroll').forEach(s => observer.observe(s));
 
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      }, {
-        threshold: 0.1
-      });
-
-      sections.forEach(section => {
-        observer.observe(section);
-      });
-
-      // Auto-scroll carousel
-      const carousel = document.getElementById("photoCarousel");
-      let scrollAmount = 0;
-
-      function autoScrollCarousel() {
-        if (!carousel) return;
-        const scrollStep = carousel.offsetWidth / 1.5;
-
-        if (scrollAmount >= carousel.scrollWidth - carousel.clientWidth) {
-          scrollAmount = 0;
-        } else {
-          scrollAmount += scrollStep;
-        }
-
-        carousel.scrollTo({
-          left: scrollAmount,
-          behavior: "smooth"
-        });
-      }
-
-      setInterval(autoScrollCarousel, 3000); // every 3 seconds
+    // Staggered entrance for timeline items
+    document.querySelectorAll('.timeline-item').forEach((item, i) => {
+      item.style.transitionDelay = (i * 0.08) + 's';
     });
   </script>
 </body>
